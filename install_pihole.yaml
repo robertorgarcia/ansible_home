@@ -4,7 +4,16 @@
   become: true
   vars_files:
     - ./sudo_password.yml
-  tasks:
-  - name: update repository index
-    apt:
+  pre_tasks:
+  - name: update repository index and packages
+    tags: always  
+    package:
       update_cache: yes
+      upgrade: dist
+      
+- hosts: raspberry
+  become: true
+  vars_files:
+    - ./sudo_password.yml  
+  roles:
+    - {role: vandycknick.security.ssh}
