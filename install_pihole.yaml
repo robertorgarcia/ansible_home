@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  vars_files:
+    - ./sudo_password.yml
+  tasks:
+  - name: update repository index
+    apt:
+      update_cache: yes
