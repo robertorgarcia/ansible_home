@@ -5,11 +5,18 @@
   vars_files:
     - ./sudo_password.yml
   pre_tasks:
-  - name: update repository index and packages
+  - name: update Ubuntu repository index and packages
+    tags: always  
+    package:
+      update_cache: yes
+      update_only: yes
+    when: ansible_facts['distribution'] == "OracleLinux"
+  - name: update Raspbian repository index and packages
     tags: always  
     package:
       update_cache: yes
       upgrade: dist
+    when: ansible_facts['distribution'] == "Debian"
       
 - hosts: all
   become: true
@@ -30,7 +37,7 @@
 - hosts: pihole
   become: true
   vars_files:
-    - ./sudo_password.yml  
+    - ./sudo_password.yml
     - vars
   roles:
     - role: r_pufky.pihole
@@ -43,3 +50,4 @@
       pihole_webpassword: '{{pihole_password}}'
       pihole_dhcp_active: 'true'
       pihole_pihole_domain: 'local'
+
