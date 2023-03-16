@@ -9,8 +9,8 @@
     tags: always  
     package:
       update_cache: yes
-      update_only: yes
-    when: ansible_facts['distribution'] == "OracleLinux"
+      upgrade: dist
+    when: ansible_facts['distribution'] == "Ubuntu"
   - name: update Raspbian repository index and packages
     tags: always  
     package:
