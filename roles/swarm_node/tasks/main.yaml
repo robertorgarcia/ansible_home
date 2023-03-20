@@ -1,7 +1,6 @@
 - name: Init a new swarm with default parameters
   become: true
   community.docker.docker_swarm:
-    state: present
-    name: default
-  register: swarm_facts
-
+    state: join
+    join_token: token
+    remote_addrs: [manager_ip]
