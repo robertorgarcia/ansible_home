@@ -1,6 +1,14 @@
+- name: debug
+  debug:
+    var: token
+- name: debug2
+  debug:
+    var: manager_ip
+
 - name: Init a new swarm with default parameters
   become: true
   community.docker.docker_swarm:
     state: join
     join_token: token
-    remote_addrs: [manager_ip]
+    remote_addrs: 
+      - "{{ manager_ip }}"

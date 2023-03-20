@@ -5,3 +5,6 @@
     name: default
   register: swarm_facts
 
+- name: set output
+  set_fact:
+    token: "{{ swarm_facts.swarm_facts.JoinTokens.Worker }}"

@@ -64,13 +64,14 @@
     - ./sudo_password.yml
   roles:
     - swarm_master
+  
 
 - hosts: swarm_node
   tags: swarm
   vars_files:
     - ./sudo_password.yml
   vars:
-    - token: swarm_facts.swarm_facts.JoinTokens.Worker
-    - manager_ip: "10.0.0.207:2377"
+    - token: "{{ hostvars['141.144.197.151']['token'] }}"
+    - manager_ip: 10.0.0.207:2377
   roles:
     - swarm_node
