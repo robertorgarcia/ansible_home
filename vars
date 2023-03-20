@@ -11,3 +11,4 @@ raspberry_pi_rc_local_options:
   - regexp: "^/usr/bin/tvservice"
     line: "/usr/bin/tvservice -o"
 
+k3s_master_ip: "193.123.56.162"
