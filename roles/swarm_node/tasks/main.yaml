@@ -9,6 +9,6 @@
   become: true
   community.docker.docker_swarm:
     state: join
-    join_token: token
+    join_token: "{{ token }}"
     remote_addrs: 
       - "{{ manager_ip }}"
