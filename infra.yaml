@@ -71,11 +71,9 @@
   vars_files:
     - ./sudo_password.yml
   vars:
-    - manager_ip: 10.0.0.207:2377
+    - manager_ip: 10.0.0.10:2377
   pre_tasks:
-    - ansible.builtin.debug:
-        var: hostvars['141.144.197.151']['token']
     - ansible.builtin.set_fact:
-        token: "{{ hostvars['141.144.197.151']['token'] }}"
+        token: "{{ hostvars[groups['swarm_master'][0]]['token'] }}"
   roles:
     - swarm_node
