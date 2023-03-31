@@ -25,15 +25,16 @@
   become: true
   vars_files:
     - ./sudo_password.yml
-    - vars
+    - pi.vars
   roles:
     - { role: geerlingguy.raspberry-pi }
 
 - hosts: pihole
   become: true
+  tags: pihole
   vars_files:
     - ./sudo_password.yml
-    - vars
+    - pi.vars
   roles:
     - role: r_pufky.pihole
       pihole_ipv4_address: "192.168.178.2/24"
@@ -45,6 +46,17 @@
       pihole_webpassword: "{{pihole_password}}"
       pihole_dhcp_active: "true"
       pihole_pihole_domain: "local"
+
+
+- hosts: pi_swan
+  become: true
+  tags: vpn
+  vars_files:
+    - ./sudo_password.yml
+    - swan.vars
+  roles:
+    - role: oukooveu.libreswan
+      
 
 - hosts: docker
   vars:
