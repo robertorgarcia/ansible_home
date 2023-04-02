@@ -1,0 +1,11 @@
+- name: Download portainer yaml
+  ansible.builtin.get_url:
+    url: https://downloads.portainer.io/ce2-17/portainer-agent-stack.yml
+    dest: /home/urbino/portainer-agent-stack.yml
+
+- name: Deploy portainer
+  community.docker.docker_stack:
+    state: present
+    name: portainer
+    compose:
+      - /home/urbino/portainer-agent-stack.yml

@@ -1,6 +1,7 @@
 ---
 - name: setup
   hosts: all
+  tags: setup
   become: true
   vars_files:
     - ./sudo_password.yml
@@ -23,6 +24,7 @@
 
 - hosts: raspberry
   become: true
+  tags: pi
   vars_files:
     - ./sudo_password.yml
     - pi.vars
@@ -89,3 +91,10 @@
         token: "{{ hostvars[groups['swarm_master'][0]]['token'] }}"
   roles:
     - swarm_node
+
+- hosts: swarm_master
+  tags: containers
+  vars_files:
+    - ./sudo_password.yml
+  roles:
+    - stacks
