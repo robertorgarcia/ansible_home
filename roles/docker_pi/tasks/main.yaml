@@ -1,0 +1,25 @@
+---
+
+
+- name: Install curl
+  ansible.builtin.apt:
+    name: curl
+    state: present
+
+- name: Download Docker installer
+  ansible.builtin.get_url:
+    url: https://get.docker.com
+    dest: /tmp/docker-installer.sh
+    mode: '777'
+
+- name: Install docker
+  ansible.builtin.shell: /tmp/docker-installer.sh
+
+- name: Install pip
+  ansible.builtin.apt:
+    name: python3-pip
+    state: present
+
+- name: Install Docker
+  ansible.builtin.pip:
+    name: docker

@@ -31,6 +31,7 @@
   roles:
     - { role: geerlingguy.raspberry-pi }
 
+
 - hosts: pihole
   become: true
   tags: pihole
@@ -71,6 +72,14 @@
   roles:
     - geerlingguy.pip
     - geerlingguy.docker
+
+- hosts: pi_docker
+  become: true
+  vars_files:
+    - ./sudo_password.yml
+  roles:
+    - geerlingguy.pip
+    - docker_pi
 
 - hosts: swarm_master
   tags: swarm
